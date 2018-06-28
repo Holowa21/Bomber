@@ -7,6 +7,7 @@ pygame.init()
 width = 640
 height = 480
 
+test=2
 xP = 10
 yP = 7
 window = pygame.display.set_mode((width, height))
