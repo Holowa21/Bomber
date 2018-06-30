@@ -1,22 +1,21 @@
 import pygame, sys
 from pygame.locals import *
-
+import Players
 
 pygame.init()
 
-width = 640
-height = 480
+width = 1920
+height = 1080
 
 
 xP = 10
 yP = 7
 window = pygame.display.set_mode((width, height))
 
-background = pygame.image.load("background.jpg").convert()
-window.blit(background, (0,0))
+window.fill((255, 255, 255))
 
-playerIMG = pygame.image.load("player.png").convert_alpha()
-window.blit(playerIMG, (xP, yP))
+playerIMG = pygame.image.load("./image/player1.png").convert_alpha()
+window.blit(playerIMG, (xP, yP), (0,0,32,32))
 
 pygame.display.flip()
 
@@ -26,16 +25,6 @@ while continuer:
     for event in pygame.event.get():
         if event.type == QUIT:
             continuer = 0
-        elif event.type == KEYDOWN or event.type == KEYUP :
-            if event.key == K_UP:
-                yP -= 5
-            elif event.key == K_DOWN:
-                yP += 5
-            elif event.key == K_LEFT:
-                xP -= 5
-            elif event.key == K_RIGHT:
-                xP += 5
-
-    window.blit(background, (0,0))
-    window.blit(playerIMG, (xP, yP))
-    pygame.display.flip()
+            pygame.quit()
+    keys = Players.checkKeys()
+    xP, yP = Players.move(keys, window, playerIMG, xP, yP)
